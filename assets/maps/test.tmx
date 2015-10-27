@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="21">
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="pokemon" tilewidth="16" tileheight="16" spacing="1">
   <image source="../tilesets/pokemon.bmp" trans="ffffff" width="1036" height="475"/>
-  <tile id="872">
-   <animation>
-    <frame tileid="872" duration="100"/>
-    <frame tileid="933" duration="100"/>
-    <frame tileid="994" duration="100"/>
-    <frame tileid="872" duration="100"/>
-    <frame tileid="872" duration="100"/>
-   </animation>
-  </tile>
  </tileset>
  <tileset firstgid="1709" name="world" tilewidth="16" tileheight="16">
   <image source="../tilesets/world.png" width="480" height="256"/>
@@ -1044,7 +1035,7 @@
   </data>
  </layer>
  <layer name="Buildings" width="32" height="32">
-  <data>
+   <data>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2071,15 +2062,20 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Collisions">
+ <objectgroup name="Collisions" width="0" height="0">
   <properties>
    <property name="colide" value="true"/>
   </properties>
-  <object id="18" gid="18" x="82" y="124" width="16" height="16"/>
-  <object id="19" x="96" y="31" width="61" height="49">
+  <object name="Plant" type="Collision" gid="18" x="30" y="124" width="16" height="16"/>
+  <object name="Rock" type="Collision" x="95" y="30" width="61" height="49" visible="0">
    <properties>
     <property name="collide" value="true"/>
    </properties>
+  </object>
+  <object name="Plant" type="Collision" gid="18" x="113" y="123" width="16" height="16"/>
+  <object name="Plant" type="Collision" gid="18" x="71" y="125" width="16" height="16"/>
+  <object x="321" y="241">
+   <polyline points="0,0 173,-1 176,-9 171,-15 4,-17 1,-11 3,-6 4,1"/>
   </object>
  </objectgroup>
 </map>
