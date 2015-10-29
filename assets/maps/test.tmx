@@ -2064,12 +2064,12 @@
  </layer>
  <objectgroup name="Collisions" width="0" height="0">
   <properties>
-   <property name="colide" value="true"/>
+   <property name="ObjectGroupPropertyTest" value="true"/>
   </properties>
   <object name="Plant" type="Collision" gid="18" x="30" y="124" width="16" height="16"/>
   <object name="Rock" type="Collision" x="95" y="30" width="61" height="49" visible="0">
    <properties>
-    <property name="collide" value="true"/>
+    <property name="ObjectPropertyTest" value="true"/>
    </properties>
   </object>
   <object name="Plant" type="Collision" gid="18" x="113" y="123" width="16" height="16"/>
