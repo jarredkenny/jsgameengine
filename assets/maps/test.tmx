@@ -2062,7 +2062,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Testing">
+ <objectgroup name="Testing" offsetx="52" offsety="12">
   <object id="57" name="Sign" gid="1435" x="124" y="108" width="16" height="16">
    <properties>
     <property name="collide" value="true"/>
