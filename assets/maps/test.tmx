@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="pokemon" tilewidth="16" tileheight="16" spacing="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="13">
+ <tileset firstgid="1" name="pokemon" tilewidth="16" tileheight="16" spacing="1" tilecount="1708" columns="61">
   <image source="../tilesets/pokemon.bmp" trans="ffffff" width="1036" height="475"/>
  </tileset>
- <tileset firstgid="1709" name="world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1709" name="world" tilewidth="16" tileheight="16" tilecount="480" columns="30">
   <image source="../tilesets/world.png" width="480" height="256"/>
  </tileset>
  <layer name="Background" width="32" height="32">
@@ -1035,7 +1035,7 @@
   </data>
  </layer>
  <layer name="Buildings" width="32" height="32">
-   <data>
+  <data>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2062,20 +2062,19 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Collisions" width="0" height="0">
+ <objectgroup name="Collisions">
   <properties>
    <property name="ObjectGroupPropertyTest" value="true"/>
   </properties>
-  <object name="Plant" type="Collision" gid="18" x="30" y="124" width="16" height="16"/>
-  <object name="Rock" type="Collision" x="95" y="30" width="61" height="49" visible="0">
+  <object id="1" name="Plant" type="Collision" gid="18" x="30" y="124" width="16" height="16"/>
+  <object id="2" name="Rock" type="Collision" x="95" y="30" width="61" height="49" visible="0">
    <properties>
     <property name="ObjectPropertyTest" value="true"/>
    </properties>
   </object>
-  <object name="Plant" type="Collision" gid="18" x="113" y="123" width="16" height="16"/>
-  <object name="Plant" type="Collision" gid="18" x="71" y="125" width="16" height="16"/>
-  <object x="321" y="241">
-   <polyline points="0,0 173,-1 176,-9 171,-15 4,-17 1,-11 3,-6 4,1"/>
-  </object>
+  <object id="3" name="Plant" type="Collision" gid="18" x="237" y="211" width="16" height="16"/>
+  <object id="4" name="Plant" type="Collision" gid="18" x="71" y="125" width="16" height="16"/>
+  <object id="6" name="Bush" x="320" y="225" width="174" height="13"/>
+  <object id="11" x="471" y="243" width="1" height="1"/>
  </objectgroup>
 </map>
