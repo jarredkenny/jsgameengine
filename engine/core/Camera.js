@@ -1,4 +1,4 @@
-import Keyboard from './Keyboard';
+import Keyboard from './io/Keyboard';
 
 class Camera {
 
@@ -33,7 +33,7 @@ class Camera {
       // Update Camera Position
       this.position.x = this.target.body.position.x  - ((this.size.x / 2) * this.zoom) + ((this.target.body.size.x) * this.zoom);
       this.position.y = this.target.body.position.y  - ((this.size.y / 2) * this.zoom) + ((this.target.body.size.y) * this.zoom);
-  
+
       // Ensure camera remains within scene bounds.
       if(this.position.x < 0){ this.position.x = 0; }
       if(this.position.x + (this.size.x * this.zoom) > scene.renderingCanvas.width){ this.position.x = scene.renderingCanvas.width - this.size.x * this.zoom; }

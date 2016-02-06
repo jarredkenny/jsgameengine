@@ -1,4 +1,4 @@
-import Body           from './Body';
+import Body           from '../physics/Body';
 import Layer          from './Layer';
 import LayerTile      from './LayerTile';
 import TileSet        from './TileSet';

@@ -1,6 +1,6 @@
-import Entity from './Entity';
-import Keyboard from './Keyboard';
-import Animation from './Animation';
+import Entity from './core/Entity';
+import Keyboard from './core/io/Keyboard';
+import Animation from './core/Animation';
 
 class Player extends Entity {
 

@@ -1,10 +1,10 @@
 import Player from './Player';
-import Scene from './Scene';
-import SceneManager from './SceneManager';
+import Scene from './core/Scene';
+import SceneManager from './core/SceneManager';
 import SpriteSheet from './SpriteSheet';
-import Map from './Map';
-import Camera from './Camera';
-import Debugger from './Debugger';
+import Map from './map/Map';
+import Camera from './core/Camera';
+import Debugger from './utils/Debugger';
 
 class Game {
 

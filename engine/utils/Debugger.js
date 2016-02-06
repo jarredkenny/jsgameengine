@@ -1,4 +1,4 @@
-import Keyboard from './Keyboard';
+import Keyboard from '../core/io/Keyboard';
 export default class Debugger {
 
   constructor(game){
