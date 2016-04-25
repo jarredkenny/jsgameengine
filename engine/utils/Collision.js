@@ -27,6 +27,21 @@ class Collision {
     );
   }
 
+  /**
+   * Entity On Map Edge
+   * Checks an entity for collisions with a maps edges.
+   * @param Entity e
+   * @param Map    m
+   */
+  static entityOnMapEdges(e, m){
+    return (
+      e.body.position.x < 0 ||
+      e.body.position.y < 0 ||
+      e.body.position.x + e.body.size.x > m.widthpx ||
+      e.body.position.y + e.body.size.y > m.heightpx
+    );
+  }
+
 }
 
 export default Collision;

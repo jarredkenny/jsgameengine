@@ -33,8 +33,6 @@ class Entity {
 
   }
 
-
-
   /**
    * Revert Move
    * Reverts the move last made using the move method. This is intended

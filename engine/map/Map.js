@@ -83,6 +83,7 @@ class Map {
       let name      = layer.getAttribute('name');
       let width     = parseInt(layer.getAttribute('width'));
       let height    = parseInt(layer.getAttribute('height'));
+      let visible   = !isNaN(parseInt(layer.getAttribute('visible'))) && parseInt(layer.getAttribute('visible')) === 0;
       let mapTiles  = [].slice.call(layer.getElementsByTagName('data')[0].getElementsByTagName('tile'));
       let tiles     = [];
 
@@ -92,7 +93,7 @@ class Map {
         tiles.push(new LayerTile(gid, 0, 0, this.tileWidth, this.tileHeight));
       });
 
-      this.layers.push(new Layer(name, width, height, tiles));
+      this.layers.push(new Layer(name, width, height, visible, tiles));
 
     });
 
@@ -143,12 +144,6 @@ class Map {
         // Adjust body for group offset.
         body.position.x += group.offsetx;
         body.position.y += group.offsety;
-
-        // TODO
-        // Figure out why the objects position is offset by its height.
-        // TMX could position objects based on their bottom left corner?!
-        // For now this fixes the issue...
-        body.position.y -= body.size.y;
 
         // Other Map Object Details
         let name      = object.getAttribute('name');
@@ -231,7 +226,7 @@ class Map {
     let y = 0;
 
     // For each layer
-    this.layers.forEach((layer) => {
+    this.layers.filter((l) => !l.visible).forEach((layer) => {
 
       // Reset the draw position for each layer.
       x = 0;

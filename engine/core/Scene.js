@@ -75,10 +75,9 @@ class Scene {
       entity.update(modifier);
 
       // Check for map edge collisions
-      if(entity.body.position.x < 0){ entity.body.position.x = 0; }
-      if(entity.body.position.x + entity.body.size.x > this.map.widthpx){ entity.body.position.x = this.map.widthpx - entity.body.size.x; }
-      if(entity.body.position.y < 0){ entity.body.position.y = 0; }
-      if(entity.body.position.y + entity.body.size.y > this.map.heightpx){ entity.body.position.y = this.map.heightpx - entity.body.size.x; }
+      if(Collision.entityOnMapEdges(entity, this.map)){
+        entity.revertMove(modifier);
+      }
 
       // Check for Entity vs. Entity collisions
       this.entities.forEach((e2) => {
