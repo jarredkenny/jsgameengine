@@ -83,7 +83,7 @@ class Map {
       let name      = layer.getAttribute('name');
       let width     = parseInt(layer.getAttribute('width'));
       let height    = parseInt(layer.getAttribute('height'));
-      let visible   = !isNaN(parseInt(layer.getAttribute('visible'))) && parseInt(layer.getAttribute('visible')) === 0;
+      let visible   = isNaN(parseInt(layer.getAttribute('visible'))) || parseInt(layer.getAttribute('visible')) !== 0;
       let mapTiles  = [].slice.call(layer.getElementsByTagName('data')[0].getElementsByTagName('tile'));
       let tiles     = [];
 
@@ -226,7 +226,7 @@ class Map {
     let y = 0;
 
     // For each layer
-    this.layers.filter((l) => !l.visible).forEach((layer) => {
+    this.layers.filter((l) => l.visible).forEach((layer) => {
 
       // Reset the draw position for each layer.
       x = 0;
