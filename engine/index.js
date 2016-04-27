@@ -7,6 +7,8 @@ import Entity       from './core/Entity';
 import Animation    from './core/Animation';
 import Keyboard     from './core/io/Keyboard';
 import SceneManager from './core/SceneManager';
+import Sprite       from './core/Sprite';
+import SpriteSheet  from './core/SpriteSheet';
 
 /**
  * Map
@@ -24,11 +26,11 @@ import MapObjectGroup from './map/MapObjectGroup';
  */
 import Body from './physics/Body';
 
-
 /**
-* TODO: Sort these into modules.
-*/
-import Game from './Game';
+ * Util
+ */
+import Debugger from './utils/Debugger';
+
 
 /**
  * Export Engine API
@@ -43,11 +45,12 @@ export default {
   Tile,
   Layer,
   TileSet,
-  MapObjectGroup,
+  MapObject,
   LayerTile,
   MapObjectGroup,
   Body,
-
-  Game
-
+  Keyboard,
+  Debugger,
+  Sprite,
+  SpriteSheet
 };

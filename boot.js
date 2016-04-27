@@ -1,4 +1,4 @@
-import {Game} from './engine';
+import Game from './lib/Game';
 
 // Create game canvas and add to dom.
 let canvas = document.createElement('canvas');

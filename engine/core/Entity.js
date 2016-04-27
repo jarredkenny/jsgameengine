@@ -1,5 +1,5 @@
 import Body   from '../physics/Body';
-import Sprite from '../Sprite';
+import Sprite from './Sprite';
 
 /**
  * Entity
