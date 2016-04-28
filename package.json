@@ -8,9 +8,11 @@
     "babel-core": "^5.8.25",
     "webpack": "^1.12.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.7"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron main.js"
   },
   "repository": {
     "type": "git",

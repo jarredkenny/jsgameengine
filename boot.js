@@ -5,8 +5,8 @@ let canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
 
 // Set game canvas size.
-canvas.height = 320;
-canvas.width = 480;
+canvas.height = 800;
+canvas.width = 600;
 
 // Create debug canvas and append to dom.
 let debugCanvas = document.createElement('canvas');
