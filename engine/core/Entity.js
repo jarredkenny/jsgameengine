@@ -1,11 +1,6 @@
 import Body   from '../physics/Body';
 import Sprite from './Sprite';
 
-/**
- * Entity
- * Base class for all game objects.
- * Holds entity position, size, speed, sprite, and supported animations.
- */
 class Entity {
 
   /**
@@ -27,8 +22,8 @@ class Entity {
 
     // Move Entity
     this.body.inMotion = true;
-    this.body.position.x += this.body.speed * modifier * Math.cos(direction);
-    this.body.position.y -= this.body.speed * modifier * Math.sin(direction);
+    this.body.position.x += this.body.velocity.x * modifier * Math.cos(direction);
+    this.body.position.y -= this.body.velocity.y * modifier * Math.sin(direction);
     this.body._lastMoveDirection = direction;
 
   }
@@ -40,8 +35,8 @@ class Entity {
    * collision has been detected in which this entity was in motion.
    */
   revertMove(modifier){
-    this.body.position.x -= this.body.speed * modifier * Math.cos(this.body._lastMoveDirection);
-    this.body.position.y += this.body.speed * modifier * Math.sin(this.body._lastMoveDirection);
+    this.body.position.x -= this.body.velocity.x * modifier * Math.cos(this.body._lastMoveDirection);
+    this.body.position.y += this.body.velocity.y * modifier * Math.sin(this.body._lastMoveDirection);
   }
 
   /**
@@ -52,7 +47,7 @@ class Entity {
 
     // Set entity as stationary. Will be changed if moved this update.
     this.body.inMotion = false;
-
+    
   }
 
   /**
