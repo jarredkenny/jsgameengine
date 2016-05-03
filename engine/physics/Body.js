@@ -1,4 +1,4 @@
-import { PHYSICS_DYNAMIC } from './Constants';
+import { PHYSICS_KINEMATIC } from './Constants';
 
 class Body {
 
@@ -15,7 +15,7 @@ class Body {
     this.position     = {x: 0, y: 0};
     this.velocity     = {x: 0, y: 0};
     this.acceleration = {x: 0, y: 0};
-    this.type         = PHYSICS_DYNAMIC;
+    this.type         = PHYSICS_KINEMATIC;
   }
 
   /**
