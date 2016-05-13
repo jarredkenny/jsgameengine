@@ -77,7 +77,7 @@ class Scene {
 
       // Apply Physics
       const gx = 0;
-      const gy = (entity.body.type === PHYSICS_DYNAMIC) ? 1.81 : 0;
+      const gy = (entity.body.type === PHYSICS_DYNAMIC) ? 9.81 : 0
       entity.body.velocity.x += entity.body.acceleration.x * modifier + gx;
       entity.body.velocity.y += entity.body.acceleration.y * modifier + gy;
       entity.body.position.x += entity.body.velocity.x * modifier;
