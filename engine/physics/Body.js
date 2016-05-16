@@ -1,50 +1,28 @@
-import { PHYSICS_KINEMATIC } from './Constants';
+import Vector from './Vector';
 
-class Body {
+export default class Body {
 
   /**
-   * Object representing a 2D game body.
-   * Contains all physics and positioning data.
+   * Physics Body
+   * Contains all information relevent to a body and
+   * methods needed for interation with the physics engine.
    */
   constructor(){
-    this.rotation     = 0;
-    this.restitution  = 1;
-    this.visible      = true;
-    this.inMotion     = false;
-    this.size         = {x: 0, y: 0};
-    this.position     = {x: 0, y: 0};
-    this.velocity     = {x: 0, y: 0};
-    this.acceleration = {x: 0, y: 0};
-    this.type         = PHYSICS_KINEMATIC;
+    this.density      = 0;
+    this.restitution  = 0;
+    this.shape        = false;
+    this.position     = new Vector();
+    this.velocity     = new Vector();
+    this.acceleration = new Vector();
   }
 
   /**
-   * Get Bounds
-   * Returns a hash of the bodys bounds
-   * as top, bottom, left, and right.
-   * @returns Object {t, b, l, r}
+   * Mass
+   * Getter which calculates mass based
+   * on the bodys volume and density.
    */
-  getBounds(){
-    return {
-      l: this.position.x,
-      t: this.position.y,
-      r: this.position.x + this.size.x,
-      b: this.position.y + this.size.y
-    };
-  }
-
-  /**
-   * Get Midpoint
-   * Returns the bodys midpoint coordinates
-   * @return Object {x, y}
-   */
-  getMidpoint(){
-    return {
-      x: this.position.x + (this.size.x * 0.5),
-      y: this.position.y + (this.size.y * 0.5)
-    };
+  get mass(){
+    return this.volume * this.density;
   }
 
 }
-
-export default Body;
