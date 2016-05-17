@@ -1,5 +1,3 @@
-import { STICKY_THRESHOLD } from './Constants';
-
 export default class Collision {
 
   /**
@@ -39,58 +37,6 @@ export default class Collision {
       e.body.position.x + e.body.size.x > m.widthpx ||
       e.body.position.y + e.body.size.y > m.heightpx
     );
-  }
-
-  /**
-   * Resolve
-   * Resolves a collision between two bodys
-   * @param body1 Body
-   * @param body2 Body
-   */
-  static resolve(b1, b2){
-
-    const b1mid     = b1.getMidpoint();
-    const b2mid     = b2.getMidpoint();
-    const b2bounds  = b2.getBounds();
-
-    const dx = Math.abs((b1mid.x - b2mid.x) / (b2.width * 0.5));
-    const dy = Math.abs((b1mid.y - b2mid.y) / (b2.height * 0.5));
-
-    if(Math.abs(dx - dy) < 0.1){
-
-      if(dx < 0){ b1.position.x = b2bounds.x.r; }
-      else      { b1.position.x = b2bounds.x.l - b1.size.x; }
-      if(dy < 0){ b1.position.y = b2bounds.y.b; }
-      else      { b1.position.y = b2bounds.y.t - b1.size.y; }
-
-      const axis = (Math.random() < 0.5) ? 'x' : 'y';
-      b1.velocity[axis] = -b1.velocity[axis] * b2.restitution;
-      if(Math.abs(b1.velocity[axis]) < STICKY_THRESHOLD){
-        b1.velocity[axis] = 0;
-      }
-
-    }else if(dx > dy){
-
-      if(dx < 0){ b1.position.x = b2bounds.r; }
-      else      { b1.position.x = b2bounds.l - b1.size.x; }
-
-      b1.velocity.x = -b1.velocity.x * b2.restitution;
-      if(Math.abs(b1.velocity.x) < STICKY_THRESHOLD){
-        b1.velocity.x = 0;
-      }
-
-    }else{
-
-      if(dy < 0){ b1.position.y = b2bounds.b; }
-      else      { b1.position.y = b2bounds.t - b1.size.y; }
-
-      b1.velocity.y = -b1.velocity.y * b2.restitution;
-      if(Math.abs(b1.velocity.y) < STICKY_THRESHOLD){
-        b1.velocity.y = 0;
-      }
-
-    }
-
   }
 
 }

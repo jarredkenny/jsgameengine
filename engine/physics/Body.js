@@ -10,8 +10,8 @@ export default class Body {
   constructor(){
     this.mass            = 0;
     this.restitution     = 0;
-    this.staticFriction  = 0;
-    this.dynamicFriction = 0;
+    this.staticFriction  = 1;
+    this.dynamicFriction = 0.3;
     this.size            = new Vector();
     this.position        = new Vector();
     this.velocity        = new Vector();

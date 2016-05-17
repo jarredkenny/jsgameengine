@@ -1,6 +1,4 @@
-import Point from './Point';
-
-export default class Vector extends Point {
+export default class Vector {
 
   /**
    * Vector
@@ -8,7 +6,8 @@ export default class Vector extends Point {
    * @param y Number
    */
   constructor(x, y){
-    super(x, y);
+    this.x = x || 0;
+    this.y = y || 0;
   }
 
   /**

@@ -1,6 +1,3 @@
-import Collision from '../physics/Collision';
-import { PHYSICS_DYNAMIC } from '../physics/Constants';
-
 /**
  * Scene
  * A Scene is a wrapper object which contains a Map and an array
@@ -69,52 +66,10 @@ class Scene {
     // Ensure the rendering target size matches the map size.
     this.resizeSceneToMap(this.map);
 
-    // Entity Updates
-    this.entities.forEach((entity) => {
+    // Update each entity
+    this.entities.forEach((e) => e.update(modifier));
 
-      // Update Individual Entities
-      entity.update(modifier);
-
-      // Apply Physics
-      const gx = 0;
-      const gy = (entity.body.type === PHYSICS_DYNAMIC) ? 9.81 : 0
-      entity.body.velocity.x += entity.body.acceleration.x * modifier + gx;
-      entity.body.velocity.y += entity.body.acceleration.y * modifier + gy;
-      entity.body.position.x += entity.body.velocity.x * modifier;
-      entity.body.position.y += entity.body.velocity.y * modifier;
-
-
-      // Check for map edge collisions
-      if(Collision.entityOnMapEdges(entity, this.map)){
-        entity.revertMove(modifier);
-      }
-
-      // Check for Entity vs. Entity collisions
-      this.entities.forEach((e2) => {
-        if(entity !== e2 && Collision.entityOnEntity(entity, e2)){
-          Collision.resolve(entity.body, e2.body);
-        }
-      });
-
-      // Check for entity collisions on map objects
-      if(entity.body.inMotion){
-        this.map.objectGroups.forEach((group) => {
-          group.objects.forEach((mapobject) => {
-            if(
-              group.properties['collide'] &&
-              mapobject.properties['collide'] !== false ||
-              mapobject.properties['collide']
-            ){
-              if(Collision.bodyOnBody(entity.body, mapobject.body)){
-                Collision.resolve(entity.body, mapobject.body);
-              }
-            }
-          });
-        });
-      }
-
-    });
-
+    // TODO: Apply physics engine logic here.
 
     // Update the scene camera
     this.camera.update(this);
