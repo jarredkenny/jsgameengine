@@ -30,8 +30,19 @@ export default class Vector {
   }
 
   /**
+   * Scale By
+   * Scales this vector using the provided coefficient.
+   * @param Number c
+   */
+  scaleBy(c){
+    this.x *= c;
+    this.y *= c;
+  }
+
+  /**
    * Add
-   * Returns the result of vector addition with the provided vector.
+   * Returns the result of vector addition between this
+   * vector and the suppied vector as a new vector.
    * @param v Vector
    */
   add(v){
@@ -39,12 +50,33 @@ export default class Vector {
   }
 
   /**
+   * Add To
+   * Adds a vector to this vector.
+   * @param Vector V
+   */
+  addTo(v){
+    this.x += v.x;
+    this.y += v.y;
+  }
+
+  /**
    * Subtract
-   * Returns the result of vector subtraction with the provided vector.
+   * Returns the result of vector substraction between this
+   * vector and the supplied vector as a new vector.
    * @param v Vector
    */
-  substract(v){
+  subtract(v){
     return new Vector(this.x - v.x, this.y - v.y);
+  }
+
+  /**
+   * Substract From
+   * Subtracts a vector from this vector.
+   * @param Vector v
+   */
+  subtractFrom(v){
+    this.x -= v.x;
+    this.y -= v.y;
   }
 
   /**

@@ -68,7 +68,9 @@ class Scene {
   update(modifier){
 
     // Ensure the rendering target size matches the map size.
-    this.resizeSceneToMap(this.map);
+    if(this.map){
+      this.resizeSceneToMap(this.map);
+    }
 
     // Update Entities
     this.entities.forEach((e) => e.update(modifier) );

@@ -9,7 +9,7 @@ export default class Body {
    */
   constructor(){
     this.mass            = 2;
-    this.restitution     = 0;
+    this.restitution     = 1;
     this.staticFriction  = 1;
     this.dynamicFriction = 0.8;
     this.force           = new Vector();
@@ -25,6 +25,15 @@ export default class Body {
    */
   get imass(){
     return this.mass === 0 ? 0 : 1 / this.mass;
+  }
+
+  get bounds(){
+    return {
+      t: this.position.y,
+      b: this.position.y + this.size.y,
+      l: this.position.x,
+      r: this.position.x + this.size.x
+    };
   }
 
   /**

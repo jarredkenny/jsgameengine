@@ -1,6 +1,6 @@
 import Vector from './Vector';
-import Manifold from './Manifold';
 import Collision from './Collision';
+import CollisionDetector from './CollisionDetector';
 
 export default class Engine {
 
@@ -21,9 +21,9 @@ export default class Engine {
   findCollisions(entities){
     entities.forEach((e1) => {
       entities.forEach((e2) => {
-        if(e1 !== e2 && Collision.entityOnEntity(e1, e2)){
-          const c = new Manifold(e1, e2);
-          if(c.solve()){
+        if(e1 !== e2 && CollisionDetector.entityOnEntity(e1, e2)){
+          const c = new Collision(e1, e2);
+          if(c.solved){
             this.contacts.push(c);
           }
         }
@@ -64,12 +64,13 @@ export default class Engine {
   }
 
   tick(entities){
+    entities.forEach((e) => e.body.applyImpulse(this.gravity));
     this.findCollisions(entities);
     this.integrateForces(entities);
     this.initializeCollisions();
     this.solveCollisions();
     this.integrateVelocities(entities);
-    this.correctPositions();
+    //this.correctPositions();
   }
 
 
