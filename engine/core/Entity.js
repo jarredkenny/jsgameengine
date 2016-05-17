@@ -1,5 +1,6 @@
-import Body   from '../physics/Body';
 import Sprite from './Sprite';
+import Body   from '../physics/Body';
+import Vector from '../physics/Vector';
 
 class Entity {
 
@@ -20,24 +21,15 @@ class Entity {
    */
   move(direction, modifier){
 
-    // Move Entity
-    this.body.inMotion = true;
-    this.body.position.x += this.body.velocity.x * modifier * Math.cos(direction);
-    this.body.position.y -= this.body.velocity.y * modifier * Math.sin(direction);
-    this.body._lastMoveDirection = direction;
+    this.body.applyImpulse(
+      new Vector(
+        Math.cos(direction) * modifier,
+        -Math.sin(direction) * modifier
+      )
+    );
 
   }
 
-  /**
-   * Revert Move
-   * Reverts the move last made using the move method. This is intended
-   * to be called after the entities update method, and then only after a
-   * collision has been detected in which this entity was in motion.
-   */
-  revertMove(modifier){
-    this.body.position.x -= this.body.velocity.x * modifier * Math.cos(this.body._lastMoveDirection);
-    this.body.position.y += this.body.velocity.y * modifier * Math.sin(this.body._lastMoveDirection);
-  }
 
   /**
    * Update
@@ -45,9 +37,6 @@ class Entity {
    */
   update(){
 
-    // Set entity as stationary. Will be changed if moved this update.
-    this.body.inMotion = false;
-    
   }
 
   /**

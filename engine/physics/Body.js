@@ -8,10 +8,11 @@ export default class Body {
    * methods needed for interation with the physics engine.
    */
   constructor(){
-    this.mass            = 0;
+    this.mass            = 2;
     this.restitution     = 0;
     this.staticFriction  = 1;
-    this.dynamicFriction = 0.3;
+    this.dynamicFriction = 0.8;
+    this.force           = new Vector();
     this.size            = new Vector();
     this.position        = new Vector();
     this.velocity        = new Vector();
@@ -31,10 +32,10 @@ export default class Body {
    * Sets volocity by integrating forces.
    * @param gravity Vector
    */
-  integrateForces(gravity){
+  integrateForces(){
     if(this.imass !== 0){
-      this.velocity.x += (this.force.x * this.imass + gravity.x) / 2;
-      this.velocity.y += (this.force.y * this.imass + gravity.y) / 2;
+      this.velocity.x += (this.force.x * this.imass) / 2;
+      this.velocity.y += (this.force.y * this.imass) / 2;
     }
   }
 
@@ -43,11 +44,11 @@ export default class Body {
    * Sets position by integrating velocity
    * @param gravity Vector
    */
-  integrateVelocity(gravity){
+  integrateVelocity(){
     if(this.imass !== 0){
       this.position.x += this.velocity.x;
       this.position.y += this.velocity.y;
-      this.integrateForces(gravity);
+      this.integrateForces();
     }
   }
 

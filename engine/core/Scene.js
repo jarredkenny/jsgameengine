@@ -1,3 +1,5 @@
+import Physics from '../physics';
+
 /**
  * Scene
  * A Scene is a wrapper object which contains a Map and an array
@@ -20,6 +22,8 @@ class Scene {
 
     // Camera
     this.camera = null;
+
+    this.physics = new Physics.Engine();
 
   }
 
@@ -66,10 +70,11 @@ class Scene {
     // Ensure the rendering target size matches the map size.
     this.resizeSceneToMap(this.map);
 
-    // Update each entity
-    this.entities.forEach((e) => e.update(modifier));
+    // Update Entities
+    this.entities.forEach((e) => e.update(modifier) );
 
-    // TODO: Apply physics engine logic here.
+    // Handle Physics
+    this.physics.tick(this.entities);
 
     // Update the scene camera
     this.camera.update(this);
