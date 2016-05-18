@@ -38,7 +38,7 @@ export default class Engine {
    * from the array of detected collisions.
    */
   cullCollisions(){
-    return [this.contacts[0]];
+    // TODO: Implement proper collision culling.
   }
 
   /**
@@ -70,7 +70,26 @@ export default class Engine {
   integrateVelocities(entities){
     entities.forEach((e) => {
       e.body.integrateVelocity();
+      e.body.clearForces();
     });
+  }
+
+  /**
+   * Postional Correction
+   * Prevents bodys from sinking
+   * into one another when resting.
+   */
+  positionalCorrection(){
+    this.contacts.forEach((c) => c.positionalCorrection());
+  }
+
+  /**
+   * Clear Collisions
+   * Removes all contacts so that
+   * they do not exist in the next tick.
+   */
+  clearCollisions(){
+    this.contacts = [];
   }
 
   /**
@@ -80,12 +99,14 @@ export default class Engine {
    * @param Array<Entity> entities
    */
   tick(entities){
-    //entities.forEach((e) => e.body.applyImpulse(this.gravity));
+    entities.forEach((e) => e.body.applyImpulse(this.gravity));
     this.findCollisions(entities);
     this.cullCollisions();
     this.integrateForces(entities);
     this.resolveCollisions();
     this.integrateVelocities(entities);
+    this.positionalCorrection();
+    this.clearCollisions();
   }
 
 

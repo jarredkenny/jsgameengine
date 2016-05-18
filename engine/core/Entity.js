@@ -23,8 +23,8 @@ class Entity {
 
     this.body.applyImpulse(
       new Vector(
-        Math.cos(direction) * modifier,
-        -Math.sin(direction) * modifier
+        Math.cos(direction),
+        -Math.sin(direction)
       )
     );
 

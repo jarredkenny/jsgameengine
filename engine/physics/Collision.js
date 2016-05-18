@@ -49,7 +49,7 @@ export default class Collision {
 
     // Determine axis of least penetration and set normal.
     if(xoverlap < yoverlap){
-      this.normal = (nv.x < 0) ? new Vector(1, 0) : new Vector(-1, 0);
+      this.normal = (nv.x < 0) ? new Vector(-1, 0) : new Vector(1, 0);
       this.penetration = xoverlap;
     }else{
       this.normal = (nv.y < 0) ? new Vector(0, -1) : new Vector(0, 1);
@@ -94,6 +94,32 @@ export default class Collision {
     // Apply calculated impulse to bodys
     a.velocity.subtractFrom(ai);
     b.velocity.addTo(bi);
+
+  }
+
+  /**
+   * Positional Correction
+   */
+  positionalCorrection(){
+
+    // Get bodys
+    const { a, b } = this;
+
+    // Set allowed penetration
+    const slop = 0.01;
+
+    // Set percentage of resolution
+    const percent = 0.2;
+
+    // Calculate impulse scaler for resolution
+    const scaler = Math.max(this.penetration - slop, 0) / (a.imass + b.imass) * percent;
+
+    // Scale normal by impulse scaler to get correction vector.
+    const correction = this.normal.scale(scaler);
+
+    // Apply correction vector to each bodys position.
+    a.position.addTo(correction.scale(a.imass));
+    b.position.subtractFrom(correction.scale(b.imass));
 
   }
 

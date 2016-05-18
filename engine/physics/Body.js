@@ -8,7 +8,7 @@ export default class Body {
    * methods needed for interation with the physics engine.
    */
   constructor(){
-    this.mass            = 2;
+    this.mass            = 10;
     this.restitution     = 0.6;
     this.staticFriction  = 2;
     this.dynamicFriction = 0.8;
@@ -80,6 +80,14 @@ export default class Body {
    */
   applyForce(force){
     this.force.addTo(force);
+  }
+
+  /**
+   * Clear Forces
+   * Removes all forces acting on this body.
+   */
+  clearForces(){
+    this.force = new Vector(0, 0);
   }
 
 }
