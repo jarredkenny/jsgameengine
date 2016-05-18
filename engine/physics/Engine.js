@@ -38,7 +38,7 @@ export default class Engine {
    * from the array of detected collisions.
    */
   cullCollisions(){
-
+    return [this.contacts[0]];
   }
 
   /**

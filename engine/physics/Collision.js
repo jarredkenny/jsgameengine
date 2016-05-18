@@ -82,7 +82,7 @@ export default class Collision {
     const e = Math.min(a.restitution, b.restitution);
 
     // Calculate impulse scaler
-    let j = (-(1 + e) * rvn) / a.imass + b.imass;
+    const j = (-(1 + e) * rvn) / a.imass + b.imass;
 
     // Scale normal to get impulse vector
     const i = this.normal.scale(j);
@@ -94,8 +94,6 @@ export default class Collision {
     // Apply calculated impulse to bodys
     a.velocity.subtractFrom(ai);
     b.velocity.addTo(bi);
-
-    //debugger;
 
   }
 

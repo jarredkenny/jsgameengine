@@ -85,7 +85,7 @@ export default class Vector {
    * @param v Vector
    */
   dot(v){
-    return this.x * v.y + this.y * v.x;
+    return this.x * v.x + this.y * v.y;
   }
 
   /**
