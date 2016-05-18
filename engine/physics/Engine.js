@@ -38,7 +38,7 @@ export default class Engine {
    * from the array of detected collisions.
    */
   cullCollisions(){
-    // TODO: Implement proper collision culling.
+
   }
 
   /**
@@ -99,7 +99,7 @@ export default class Engine {
    * @param Array<Entity> entities
    */
   tick(entities){
-    entities.forEach((e) => e.body.applyImpulse(this.gravity));
+    entities.forEach((e) => e.body.applyForce(this.gravity));
     this.findCollisions(entities);
     this.cullCollisions();
     this.integrateForces(entities);

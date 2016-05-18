@@ -56,6 +56,7 @@ export default class Collision {
       this.penetration = yoverlap;
     }
 
+    // If we are here, normal and penetration have been solved for.
     return true;
 
   }
@@ -82,7 +83,7 @@ export default class Collision {
     const e = Math.min(a.restitution, b.restitution);
 
     // Calculate impulse scaler
-    const j = (-(1 + e) * rvn) / a.imass + b.imass;
+    const j = (-(1 + e) * rvn) / (a.imass + b.imass);
 
     // Scale normal to get impulse vector
     const i = this.normal.scale(j);
@@ -94,7 +95,6 @@ export default class Collision {
     // Apply calculated impulse to bodys
     a.velocity.subtractFrom(ai);
     b.velocity.addTo(bi);
-
   }
 
   /**
@@ -106,16 +106,16 @@ export default class Collision {
     const { a, b } = this;
 
     // Set allowed penetration
-    const slop = 0.01;
+    const slop = 0.07;
 
     // Set percentage of resolution
     const percent = 0.2;
 
     // Calculate impulse scaler for resolution
-    const scaler = Math.max(this.penetration - slop, 0) / (a.imass + b.imass) * percent;
+    const scaler = (Math.max(this.penetration - slop, 0) / (a.imass + b.imass));
 
     // Scale normal by impulse scaler to get correction vector.
-    const correction = this.normal.scale(scaler);
+    const correction = this.normal.scale(scaler * percent);
 
     // Apply correction vector to each bodys position.
     a.position.addTo(correction.scale(a.imass));

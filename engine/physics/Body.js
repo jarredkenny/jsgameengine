@@ -1,4 +1,5 @@
 import Vector from './Vector';
+import Identifier from '../utils/Identifier';
 
 export default class Body {
 
@@ -8,8 +9,9 @@ export default class Body {
    * methods needed for interation with the physics engine.
    */
   constructor(){
+    this.id              = Identifier.next();
     this.mass            = 10;
-    this.restitution     = 0.6;
+    this.restitution     = 0.2;
     this.staticFriction  = 2;
     this.dynamicFriction = 0.8;
     this.force           = new Vector();
