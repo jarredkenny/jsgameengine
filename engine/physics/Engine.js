@@ -80,7 +80,7 @@ export default class Engine {
    * @param Array<Entity> entities
    */
   tick(entities){
-    entities.forEach((e) => e.body.applyImpulse(this.gravity));
+    //entities.forEach((e) => e.body.applyImpulse(this.gravity));
     this.findCollisions(entities);
     this.cullCollisions();
     this.integrateForces(entities);

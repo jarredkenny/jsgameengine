@@ -48,8 +48,8 @@ export default class Collision {
     if(yoverlap < 0){ return false; }
 
     // Determine axis of least penetration and set normal.
-    if(xoverlap > yoverlap){
-      this.normal = (nv.x < 0) ? new Vector(-1, 0) : new Vector(1, 0);
+    if(xoverlap < yoverlap){
+      this.normal = (nv.x < 0) ? new Vector(1, 0) : new Vector(-1, 0);
       this.penetration = xoverlap;
     }else{
       this.normal = (nv.y < 0) ? new Vector(0, -1) : new Vector(0, 1);
@@ -70,7 +70,6 @@ export default class Collision {
     const { a, b } = this;
 
     // Calculate relative velocity
-    //console.log(b.velocity, a.velocity);
     const rv = b.velocity.subtract(a.velocity);
 
     // Calculate relative velocity in terms of normal direction
@@ -83,8 +82,7 @@ export default class Collision {
     const e = Math.min(a.restitution, b.restitution);
 
     // Calculate impulse scaler
-    let j = -(1 + e) * rvn;
-    j /= a.imass + b.imass;
+    let j = (-(1 + e) * rvn) / a.imass + b.imass;
 
     // Scale normal to get impulse vector
     const i = this.normal.scale(j);

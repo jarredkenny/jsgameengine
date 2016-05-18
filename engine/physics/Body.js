@@ -8,7 +8,7 @@ export default class Body {
    * methods needed for interation with the physics engine.
    */
   constructor(){
-    this.mass            = 20;
+    this.mass            = 2;
     this.restitution     = 0.6;
     this.staticFriction  = 2;
     this.dynamicFriction = 0.8;

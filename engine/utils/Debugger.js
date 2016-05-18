@@ -3,6 +3,11 @@ export default class Debugger {
 
   constructor(game){
     this.game = game;
+    this.player = false;
+  }
+
+  setPlayer(player){
+    this.player = player;
   }
 
   draw(context){
@@ -32,6 +37,16 @@ export default class Debugger {
     // Draw Keyboard keys
     context.fillText('Keys:', 12, 112);
     context.fillText(Object.keys(Keyboard.keys).join(', '), 12, 132);
+
+    // Draw player details
+    if(this.player){
+      const p = this.player.body;
+      context.fillText('Player', 142, 24);
+      context.fillText(`position: ${p.position.x.toFixed(1)}, ${p.position.y.toFixed(1)}`, 142, 44);
+      context.fillText(`velocity: ${p.velocity.x.toFixed(1)}, ${p.velocity.y.toFixed(1)}`, 142, 66);
+      context.fillText(`acceleration: ${p.acceleration.x.toFixed(1)}, ${p.acceleration.y.toFixed(1)}`, 142, 86);
+      context.fillText(`force: ${p.force.x.toFixed(1)}, ${p.force.y.toFixed(1)}`, 142, 106);
+    }
 
   }
 
