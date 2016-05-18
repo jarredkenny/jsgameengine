@@ -8,9 +8,9 @@ export default class Body {
    * methods needed for interation with the physics engine.
    */
   constructor(){
-    this.mass            = 2;
-    this.restitution     = 1;
-    this.staticFriction  = 1;
+    this.mass            = 20;
+    this.restitution     = 0.6;
+    this.staticFriction  = 2;
     this.dynamicFriction = 0.8;
     this.force           = new Vector();
     this.size            = new Vector();
@@ -27,6 +27,11 @@ export default class Body {
     return this.mass === 0 ? 0 : 1 / this.mass;
   }
 
+  /**
+   * Bounds
+   * Returns an object with the coordinates of the top,
+   * bottom, left, and right bounds on their respective axis.
+   */
   get bounds(){
     return {
       t: this.position.y,
@@ -39,7 +44,6 @@ export default class Body {
   /**
    * Integrate Forces
    * Sets volocity by integrating forces.
-   * @param gravity Vector
    */
   integrateForces(){
     if(this.imass !== 0){
@@ -51,7 +55,6 @@ export default class Body {
   /**
    * Integerate Velocity
    * Sets position by integrating velocity
-   * @param gravity Vector
    */
   integrateVelocity(){
     if(this.imass !== 0){
@@ -67,8 +70,7 @@ export default class Body {
    * @param force Vector
    */
   applyImpulse(force){
-    this.velocity.x += this.imass * force.x;
-    this.velocity.y += this.imass * force.y;
+    this.velocity.addTo(force.scale(this.imass));
   }
 
   /**
@@ -77,8 +79,7 @@ export default class Body {
    * @param force Vector
    */
   applyForce(force){
-    this.force.x += force.x;
-    this.force.y += force.y;
+    this.force.addTo(force);
   }
 
 }

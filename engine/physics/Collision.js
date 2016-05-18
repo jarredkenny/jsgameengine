@@ -7,20 +7,19 @@ export default class Collision {
    * Contains data pertaining to a body vs. body collision.
    * Calculates collision normal and resolves the collision
    * by applying impulses to each body.
-   * @param Body b1
-   * @param Body b2
+   * @param Entity e1
+   * @param Entity e2
    */
-  constructor(b1, b2){
-    this.a      = b1.body;
-    this.b      = b2.body;
-    this.solved = this.init();
+  constructor(e1, e2){
+    this.a      = e1.body;
+    this.b      = e2.body;
   }
 
   /**
-   * Init
+   * Solve
    * Calculates collision normal and penetration depth.
    */
-  init(){
+  solve(){
 
     // Get bodys
     const { a, b } = this;
@@ -34,8 +33,6 @@ export default class Collision {
 
     // Calculate overlap on xaxis
     const xoverlap = aex + bex - Math.abs(nv.x);
-
-    console.log(xoverlap); debugger;
 
     // Stop if no overlap
     if(xoverlap < 0){ return false; }
@@ -73,6 +70,7 @@ export default class Collision {
     const { a, b } = this;
 
     // Calculate relative velocity
+    //console.log(b.velocity, a.velocity);
     const rv = b.velocity.subtract(a.velocity);
 
     // Calculate relative velocity in terms of normal direction
@@ -85,18 +83,22 @@ export default class Collision {
     const e = Math.min(a.restitution, b.restitution);
 
     // Calculate impulse scaler
-    const j = -(1 + e) * rvn;
+    let j = -(1 + e) * rvn;
+    j /= a.imass + b.imass;
 
     // Scale normal to get impulse vector
     const i = this.normal.scale(j);
 
     // Seperate and scale impulse vector by inverse mass.
-    const ai = i.scale(1 / a.imass);
-    const bi = i.scale(1 / b.imass);
+    const ai = i.scale(a.imass);
+    const bi = i.scale(b.imass);
 
     // Apply calculated impulse to bodys
     a.velocity.subtractFrom(ai);
     b.velocity.addTo(bi);
+
+    //debugger;
+
   }
 
 }

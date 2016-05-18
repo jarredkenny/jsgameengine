@@ -11,6 +11,7 @@ export default class Engine {
     this.contacts   = [];
     this.iterations = 10;
     this.gravity    = new Vector(0, 1);
+    this.objcount   = 0;
   }
 
   /**
@@ -23,7 +24,7 @@ export default class Engine {
       entities.forEach((e2) => {
         if(e1 !== e2 && CollisionDetector.entityOnEntity(e1, e2)){
           const c = new Collision(e1, e2);
-          if(c.solved){
+          if(c.solve()){
             this.contacts.push(c);
           }
         }
@@ -31,19 +32,30 @@ export default class Engine {
     });
   }
 
+  /**
+   * Cull Collisions
+   * Removes duplicate collisions pairs
+   * from the array of detected collisions.
+   */
+  cullCollisions(){
+
+  }
+
+  /**
+   * Integrate Forces
+   * Integrates forces on all entities.
+   */
   integrateForces(entities){
     entities.forEach((e) => {
       e.body.integrateForces();
     });
   }
 
-  initializeCollisions(){
-    this.contacts.forEach((c) => {
-      c.init(new Vector(0, 1));
-    });
-  }
-
-  solveCollisions(){
+  /**
+   * Resolve Collisions
+   * Resolves all detected collisions.
+   */
+  resolveCollisions(){
     for(let i = 0; i < this.iterations; i++){
       this.contacts.forEach((c) => {
         c.resolve();
@@ -51,26 +63,29 @@ export default class Engine {
     }
   }
 
+  /**
+   * Integrate Velocities
+   * Integrates velocities on all entities.
+   */
   integrateVelocities(entities){
     entities.forEach((e) => {
       e.body.integrateVelocity();
     });
   }
 
-  correctPositions(){
-    this.contacts.forEach((c) => {
-      c.positionalCorrection();
-    });
-  }
-
+  /**
+   * Tick
+   * Run the full physics engine loop on
+   * the provided collection of entities.
+   * @param Array<Entity> entities
+   */
   tick(entities){
     entities.forEach((e) => e.body.applyImpulse(this.gravity));
     this.findCollisions(entities);
+    this.cullCollisions();
     this.integrateForces(entities);
-    this.initializeCollisions();
-    this.solveCollisions();
+    this.resolveCollisions();
     this.integrateVelocities(entities);
-    //this.correctPositions();
   }
 
 
