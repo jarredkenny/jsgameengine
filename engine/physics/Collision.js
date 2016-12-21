@@ -106,10 +106,10 @@ export default class Collision {
     const { a, b } = this;
 
     // Set allowed penetration
-    const slop = 0.07;
+    const slop = 0.01;
 
     // Set percentage of resolution
-    const percent = 0.2;
+    const percent = 0.04041;
 
     // Calculate impulse scaler for resolution
     const scaler = (Math.max(this.penetration - slop, 0) / (a.imass + b.imass));

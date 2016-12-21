@@ -37,8 +37,41 @@ export default class Engine {
    * Removes duplicate collisions pairs
    * from the array of detected collisions.
    */
-  cullCollisions(){
+  cullCollisions(collisions){
+    // TODO: Implement body uuid based culling of collision pairs.
+    //       Track encountered collision pairs in a 2D array
+    //       Do not track collision pairs who has been encountered.
+    //       Do not track collisions pairs who's reverse has been encountered.
 
+    // Track discovered pairs
+    const pairs = [];
+
+    // Track unique collisions
+    const unique = [];
+
+    // Consider each detected collisions
+    collisions.forEach((collision) => {
+
+      // Destructure bodys from collision
+      let seen = [];
+      const { a, b } = collision;
+
+      // Determine if this collision has already been seen
+      seen = pairs.filter((pair) => {
+        return (
+          (pair[0] === a.id && pair[1] === b.id) ||
+          (pair[1] === a.id && pair[0] === b.id)
+        );
+      });
+
+      // If collision is unique, IE. has not been seen
+      // add it to the unique array, and track the pair.
+      if(seen.length === 0) {
+        pairs.push([a.id, b.id]);
+        unique.push(collision);
+      }
+    });
+    return unique;
   }
 
   /**
@@ -101,7 +134,7 @@ export default class Engine {
   tick(entities){
     entities.forEach((e) => e.body.applyForce(this.gravity));
     this.findCollisions(entities);
-    this.cullCollisions();
+    this.contacts = this.cullCollisions(this.contacts);
     this.integrateForces(entities);
     this.resolveCollisions();
     this.integrateVelocities(entities);
